@@ -7,4 +7,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\RestCliClient.Core\RestCliClient.Core.csproj" />
+      <ProjectReference Include="..\RestCliClient.UI\RestCliClient.UI.csproj" />
+    </ItemGroup>
+
 </Project>
