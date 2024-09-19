@@ -5,9 +5,11 @@ namespace RestCliClient.Core;
 
 public class JsonObject
 {
-    private JsonNode _json;
+    private readonly JsonNode _json;
     public JsonObject(string rawJson)
     {
         _json = JsonNode.Parse(rawJson) ?? throw new InvalidJsonException();
     }
+
+    public override string ToString() => _json.ToJsonString();
 }
