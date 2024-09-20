@@ -1,4 +1,5 @@
 using RestCliClient.Core.Consts;
+using RestCliClient.Core.Requests;
 
 namespace RestCliClient.Core.Commands;
 
@@ -9,7 +10,11 @@ class RequestBuilderCommand: ICommand
     
     public void Execute(Context context, ILogger logger)
     {
-        //context.
+        if(_command is null) throw new NullReferenceException("Command is null");
+        var splitPoint = _command.IndexOf(' ');
+        if(splitPoint < 0 || splitPoint == _command.Length - 1) throw new FormatException(Messages.INVALID_REQUEST_BUILDER_COMMAND);
+        context.RequestBuilder = new RequestBuilder(_command[..splitPoint], _command[splitPoint..]);
+        context.Scope = Scopes.RequestBuilderHeaders;
     }
 
     public bool CanExecute(Context context, string command)

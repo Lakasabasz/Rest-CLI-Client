@@ -3,7 +3,7 @@ using RestCliClient.Core.Consts;
 
 namespace RestCliClient.UI.Components;
 
-public class GlobalPrompt
+public class GlobalPrompt: IPrompt
 {
     private readonly Context _context;
     private readonly string _promptText;

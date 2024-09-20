@@ -15,6 +15,6 @@ public static class CommandHandler
     {
         return Commands.Where(x => x.ValidScopes.Contains(scope))
             .FirstOrDefault(x => x.CanExecute(context, rawCommand.Trim()))
-            ?.Command(rawCommand) ?? throw new InvalidCommandException(rawCommand);
+            ?.Command(rawCommand.Trim()) ?? throw new InvalidCommandException(rawCommand);
     }
 }

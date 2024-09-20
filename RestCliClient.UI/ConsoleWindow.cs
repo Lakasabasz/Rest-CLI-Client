@@ -26,7 +26,12 @@ public class ConsoleWindow: IDisplayWindow
                 var command = Context.GetPrompt().TakeCommand();
                 command.Execute(Context, Logger);
             }
-            catch(InvalidCommandException ex)
+            catch (InvalidCommandException ex)
+            {
+                Console.WriteLine(ex.Message);
+                if(_debugMode) Console.WriteLine(ex.ToString());
+            }
+            catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
                 if(_debugMode) Console.WriteLine(ex.ToString());
