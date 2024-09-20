@@ -13,6 +13,6 @@ public class BodyPrompt(Context ctx): IPrompt
     
     private void Display()
     {
-        Console.WriteLine("BODY> ");
+        Console.Write("BODY> ");
     }
 }

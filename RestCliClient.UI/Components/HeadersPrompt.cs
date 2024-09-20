@@ -19,6 +19,6 @@ public class HeadersPrompt : IPrompt
     
     private void Display()
     {
-        Console.WriteLine("HEADER> ");
+        Console.Write("HEADER> ");
     }
 }

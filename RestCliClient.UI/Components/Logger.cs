@@ -9,7 +9,7 @@ public class Logger: ILogger
         throw new NotImplementedException();
     }
 
-    public void LogMultiline(string message)
+    public void LogMultiline(string logger, string message)
     {
         throw new NotImplementedException();
     }
