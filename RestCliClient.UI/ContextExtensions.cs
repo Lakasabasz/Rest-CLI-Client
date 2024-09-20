@@ -12,7 +12,7 @@ static class ContextExtensions
         {
             Scopes.Global => new GlobalPrompt(context),
             Scopes.RequestBuilderHeaders => new HeadersPrompt(context),
-            Scopes.RequestBuilderBody => null!,
+            Scopes.RequestBuilderBody => new BodyPrompt(context),
             _ => throw new ArgumentOutOfRangeException(),
         };
     }

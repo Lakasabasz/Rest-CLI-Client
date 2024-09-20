@@ -11,4 +11,12 @@ static class Messages
         
         Example: GET https://example.com:8080/api?version=1.0
         """;
+
+    public static string INVALID_HEADER_COMMAND =>
+        """
+        To add new header use format: `<key>:<value>`
+        For example: `Content-Type: application/json`
+        
+        If you want to go next press enter without content
+        """;
 }
