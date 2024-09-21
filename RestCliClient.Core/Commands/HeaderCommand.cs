@@ -16,7 +16,7 @@ public class HeaderCommand: ICommand
             return;
         }
         var splitPoint = _rawCommand.IndexOf(':');
-        if(splitPoint < 0) throw new FormatException(Messages.INVALID_HEADER_COMMAND);
+        if(splitPoint < 1) throw new FormatException(Messages.INVALID_HEADER_COMMAND);
         var key = _rawCommand[..splitPoint].Trim();
         var value = _rawCommand[splitPoint..].Trim();
         context.RequestBuilder.AddHeader(key, value);

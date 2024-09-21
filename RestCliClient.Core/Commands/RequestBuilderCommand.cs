@@ -3,7 +3,7 @@ using RestCliClient.Core.Requests;
 
 namespace RestCliClient.Core.Commands;
 
-class RequestBuilderCommand: ICommand
+public class RequestBuilderCommand: ICommand
 {
     private string? _command;
     public IEnumerable<Scopes> ValidScopes => [Scopes.Global];

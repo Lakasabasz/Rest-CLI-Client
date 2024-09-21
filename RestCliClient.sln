@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestCliClient.Core", "RestC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestCliClient.UI", "RestCliClient.UI\RestCliClient.UI.csproj", "{D76F15DE-F594-4B9C-89F5-EFD188F2A47D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestCliClient.Tests", "RestCliClient.Tests\RestCliClient.Tests.csproj", "{EED8EC14-BCA2-4420-A843-C59962615E7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{D76F15DE-F594-4B9C-89F5-EFD188F2A47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D76F15DE-F594-4B9C-89F5-EFD188F2A47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D76F15DE-F594-4B9C-89F5-EFD188F2A47D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED8EC14-BCA2-4420-A843-C59962615E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED8EC14-BCA2-4420-A843-C59962615E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED8EC14-BCA2-4420-A843-C59962615E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED8EC14-BCA2-4420-A843-C59962615E7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
