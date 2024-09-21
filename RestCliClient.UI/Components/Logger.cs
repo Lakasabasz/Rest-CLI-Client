@@ -6,12 +6,14 @@ public class Logger: ILogger
 {
     public void LogLine(string message)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"> {message}");
     }
 
-    public void LogMultiline(string logger, string message)
+    public void LogMultiline(string title, string message, bool closed = true)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($">>> {title}");
+        Console.WriteLine(message);
+        if(closed) Console.WriteLine(">>>");
     }
 
     public void LogError(string message)

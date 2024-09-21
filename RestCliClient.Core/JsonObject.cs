@@ -10,6 +10,20 @@ public class JsonObject
     {
         _json = JsonNode.Parse(rawJson) ?? throw new InvalidJsonException();
     }
+    
+    public static bool TryParse(string rawJson, out JsonObject? jsonObject)
+    {
+        try
+        {
+            jsonObject = new JsonObject(rawJson);
+            return true;
+        }
+        catch (InvalidJsonException)
+        {
+            jsonObject = null;
+            return false;
+        }
+    }
 
     public override string ToString() => _json.ToJsonString();
 }

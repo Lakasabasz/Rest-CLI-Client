@@ -15,6 +15,7 @@ public class ConsoleWindow: IDisplayWindow
     {
         Context = new Context();
         _debugMode = debugMode;
+        Logger = new Logger();
     }
     
     public void MainLoop()

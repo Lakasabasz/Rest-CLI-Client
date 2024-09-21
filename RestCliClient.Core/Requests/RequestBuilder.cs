@@ -35,7 +35,7 @@ public class RequestBuilder
         var request = new RestRequest(_uri, _method)
             .AddHeaders(_headers)
             .AddBody(_body);
-        var queryParams = _uri.Query.Split('&');
+        var queryParams = _uri.Query.Split('&').Where(x => !string.IsNullOrWhiteSpace(x));
         foreach (string queryParam in queryParams)
         {
             var parts = queryParam.Split('=');

@@ -18,7 +18,8 @@ public class RequestHandler(RequestBuilder builder, ILogger logger)
         }
         logger.LogLine(Consts.Messages.REQUEST_RESULT_WITH_CODE(response.StatusCode));
         logger.LogMultiline(Consts.Messages.RESPONSE_HEADER,
-            string.Join("\n", response.Headers?.Select(x => $"{x.Name}: {x.Value}") ?? []));
+            string.Join("\n", response.Headers?.Select(x => $"{x.Name}: {x.Value}") ?? []),
+            false);
         logger.LogMultiline(Consts.Messages.RESPONSE_BODY, response.Content ?? string.Empty);
         Response = new Response(response);
     }
