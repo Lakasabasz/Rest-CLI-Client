@@ -32,6 +32,11 @@ public class ConsoleWindow: IDisplayWindow
                 Console.WriteLine(ex.Message);
                 if(_debugMode) Console.WriteLine(ex.ToString());
             }
+            catch(InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+                if(_debugMode) Console.WriteLine(ex.ToString());
+            }
             catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
