@@ -19,7 +19,7 @@ public class HeaderCommand: ICommand
         if(splitPoint < 1) throw new FormatException(Messages.INVALID_HEADER_COMMAND);
         var key = _rawCommand[..splitPoint].Trim();
         var value = _rawCommand[splitPoint..].Trim();
-        context.RequestBuilder.AddHeader(key, value);
+        context.RequestBuilder.AddHeader(key.ResolveVariables(context), value.ResolveVariables(context));
     }
 
     public bool CanExecute(Context context, string command) => true;

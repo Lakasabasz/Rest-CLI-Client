@@ -13,7 +13,7 @@ public class RequestBuilderCommand: ICommand
         if(_command is null) throw new NullReferenceException("Command is null");
         var splitPoint = _command.IndexOf(' ');
         if(splitPoint < 0 || splitPoint == _command.Length - 1) throw new FormatException(Messages.INVALID_REQUEST_BUILDER_COMMAND);
-        context.RequestBuilder = new RequestBuilder(_command[..splitPoint], _command[splitPoint..]);
+        context.RequestBuilder = new RequestBuilder(_command[..splitPoint], _command[splitPoint..].ResolveVariables(context));
         context.Scope = Scopes.RequestBuilderHeaders;
     }
 

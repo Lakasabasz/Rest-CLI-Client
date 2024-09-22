@@ -20,7 +20,7 @@ public class BodyCommand: ICommand
             context.Scope = Scopes.Global;
             return;
         }
-        context.RequestBuilder.AppendBody(_command);
+        context.RequestBuilder.AppendBody(_command.ResolveVariables(context));
     }
 
     public bool CanExecute(Context context, string command) => true;
