@@ -40,6 +40,19 @@ public static class Messages
     public const string MISSING_LAST_REQUEST = "Cannot set variable using json path without finished request before";
     public const string LAST_REQUEST_NOT_JSON = "Setting variable using json path with non-json response from request before is not supported";
 
+    public const string INVALID_EXECUTE_COMMAND =
+        """
+        To execute sequence use format: `EXECUTE <sequence_name> [params]...`
+        - sequence_name: name of file containing sequence definition. Name without extension. File with definition have to be in the execution directory
+        - params: params defined in the sequence. It cannot contains space but it can be variable
+        
+        For example:
+        - EXECUTE createGroup myname
+        """;
+
+    public const string INVALID_SEQUENCE_FORMAT = "Invalid sequence format";
+
     public static string REQUEST_RESULT_WITH_CODE(HttpStatusCode response)
         => $"Request result with code {(int)response}";
+    public static string? INVALID_EXECUTE_ARGUMENTS_COUNT(int inLength, int argsCount) => $"Selected sequence requires {inLength}, but provided {argsCount} arguments";
 }

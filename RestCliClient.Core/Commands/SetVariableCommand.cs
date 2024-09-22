@@ -15,16 +15,7 @@ public class SetVariableCommand: ICommand
 		var variableName = split[0].TrimStart('$').Trim();
 		if(string.IsNullOrWhiteSpace(variableName)) throw new FormatException(Messages.INVALID_SET_VARIABLE_COMMAND);
 		var rawValue = split[1].Trim();
-		string value;
-		if(rawValue.StartsWith('$'))
-		{
-			if(context.LastRequest is null) throw new InvalidOperationException(Messages.MISSING_LAST_REQUEST);
-			if(context.LastRequest.JsonContent is null) throw new NotSupportedException(Messages.LAST_REQUEST_NOT_JSON);
-			value = context.LastRequest.JsonContent.GetValueByPath(rawValue);
-		}
-		else value = rawValue;
-
-		context.Variables[variableName] = value;
+		VariableHelper.SetVariable(context, variableName, rawValue);
 	}
 	public bool CanExecute(Context context, string command) => context.Scope == Scopes.Global && command.StartsWith('$');
 	public ICommand Command(string rawCommand)
