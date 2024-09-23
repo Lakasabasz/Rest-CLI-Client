@@ -9,4 +9,5 @@ public class Context
     public Response? LastRequest { get; set; } = null;
     public RequestBuilder? RequestBuilder { get; set; }
     public Dictionary<string, string> Variables { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> CommonNames { get; set; } = new Dictionary<string, string>();
 }

@@ -53,4 +53,9 @@ public static class VariableResolver
 		
 		return combined;
 	}
+
+	public static string ResolveCommonName(this string str, Context context)
+	{
+		return str;
+	}
 }

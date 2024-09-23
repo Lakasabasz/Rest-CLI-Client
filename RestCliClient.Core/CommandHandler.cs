@@ -13,6 +13,7 @@ public static class CommandHandler
     
     public static ICommand CreateCommand(Scopes scope, Context context, string rawCommand)
     {
+        rawCommand = rawCommand.Trim().ResolveCommonName(context);
         return Commands.Where(x => x.ValidScopes.Contains(scope))
             .FirstOrDefault(x => x.CanExecute(context, rawCommand.Trim()))
             ?.Command(rawCommand.Trim()) ?? throw new InvalidCommandException(rawCommand);
