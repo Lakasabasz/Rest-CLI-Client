@@ -11,7 +11,7 @@ public class GlobalPrompt: IPrompt
     public GlobalPrompt(Context context)
     {
         _context = context;
-        _promptText = context.LastRequest is not null ? $"({context.LastRequest.Method} {context.LastRequest.Uri})" : string.Empty;
+        _promptText = context.LastRequest?.JsonContent is not null ? $"({context.LastRequest.Method} {context.LastRequest.Uri})" : string.Empty;
     }
     
     public ICommand TakeCommand()

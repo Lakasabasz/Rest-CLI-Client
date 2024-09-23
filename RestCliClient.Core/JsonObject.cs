@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Nodes;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
 using Json.Path;
 using RestCliClient.Core.Exceptions;
 
@@ -20,6 +21,11 @@ public class JsonObject
             return true;
         }
         catch (InvalidJsonException)
+        {
+            jsonObject = null;
+            return false;
+        }
+        catch(JsonException)
         {
             jsonObject = null;
             return false;
