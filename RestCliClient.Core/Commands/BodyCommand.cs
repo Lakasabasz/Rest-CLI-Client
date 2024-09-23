@@ -15,7 +15,15 @@ public class BodyCommand: ICommand
         if(string.IsNullOrEmpty(_command))
         {
             var handler = new RequestHandler(context.RequestBuilder, logger);
-            handler.Handle();
+            try
+            {
+                handler.Handle();
+            }
+            catch(Exception ex)
+            {
+                context.Scope = Scopes.Global;
+                throw;
+            }
             context.LastRequest = handler.Response;
             context.Scope = Scopes.Global;
             return;
