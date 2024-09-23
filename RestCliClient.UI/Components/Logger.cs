@@ -18,6 +18,6 @@ public class Logger: ILogger
 
     public void LogError(string message)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"#> {message}");
     }
 }
