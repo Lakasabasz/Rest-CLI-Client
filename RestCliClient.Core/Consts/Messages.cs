@@ -55,4 +55,6 @@ public static class Messages
     public static string REQUEST_RESULT_WITH_CODE(HttpStatusCode response)
         => $"Request result with code {(int)response}";
     public static string? INVALID_EXECUTE_ARGUMENTS_COUNT(int inLength, int argsCount) => $"Selected sequence requires {inLength}, but provided {argsCount} arguments";
+    public static string VARIABLE_NOT_FOUND(string variable) => $"Variable {variable} not found";
+    public static string JSON_PATH_NOT_FOUND(string path) => $"Path {path} not found";
 }

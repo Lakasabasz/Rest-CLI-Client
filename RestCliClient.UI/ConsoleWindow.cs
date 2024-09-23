@@ -41,23 +41,29 @@ public class ConsoleWindow: IDisplayWindow
             catch (InvalidCommandException ex)
             {
                 Console.WriteLine(ex.Message);
-                if(_debugMode) Console.WriteLine(ex.ToString());
+                if (_debugMode) Console.WriteLine(ex.ToString());
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 Console.WriteLine(ex.Message);
-                if(_debugMode) Console.WriteLine(ex.ToString());
+                if (_debugMode) Console.WriteLine(ex.ToString());
             }
             catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
+                if (_debugMode) Console.WriteLine(ex.ToString());
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("Unhandled IO Exception occured");
                 if(_debugMode) Console.WriteLine(ex.ToString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Unhandled error occured");
-                if(_debugMode) Console.WriteLine(ex.ToString());
+                if (_debugMode) Console.WriteLine(ex.ToString());
             }
+            
         }
     }
     
