@@ -1,0 +1,4 @@
+{
+  "type-json": "Content-Type: application/json",
+  "jwt": "Authorization: Bearer"
+}

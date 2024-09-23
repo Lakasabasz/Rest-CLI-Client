@@ -2,27 +2,30 @@ namespace RestCliClient.Core;
 
 public static class VariableResolver
 {
-	public static string ResolveVariables(this string str, Context context)
+	private static List<string> Split(string str, char separator)
 	{
-		List<int> triggerPositions = [];
+		List<string> parts = [];
+		var lastPos = 0;
 		var currentPosition = 0;
 		while (currentPosition < str.Length)
 		{
-			var position = str.IndexOf('$', currentPosition);
-			if(position == -1) break;
-			triggerPositions.Add(position);
+			var position = str.IndexOf(separator, currentPosition);
+			if(position == -1)
+			{
+				parts.Add(str[lastPos..]);
+				break;
+			}
 			currentPosition = position + 1;
+			parts.Add(str[lastPos..position]);
+			lastPos = position;
 		}
+		return parts;
+	}
+	
+	private static string Resolve(string str, Dictionary<string, string> variables, char trigger)
+	{
+		var parts = Split(str, trigger);
 
-		List<string> parts = [];
-		var lastPos = 0;
-		foreach (var i in triggerPositions)
-		{
-			parts.Add(str[lastPos..i]);
-			lastPos = i;
-		}
-		parts.Add(str[lastPos..]);
-		
 		string combined = string.Empty;
 		var skipNext = false;
 		foreach (var part in parts)
@@ -34,28 +37,26 @@ public static class VariableResolver
 				continue;
 			}
 			if(part.Length < 1) continue;
-			if(part == "$")
+			if(part == $"{trigger}")
 			{
 				skipNext = true;
 				continue;
 			}
 
-			var key = context.Variables.Keys
-				.Where(variablesKey => part.StartsWith("$" + variablesKey))
+			var key = variables.Keys
+				.Where(variablesKey => part.StartsWith($"{trigger}" + variablesKey))
 				.MaxBy(x => x.Length);
 			if(key is null)
 			{
 				combined += part;
 				continue;
 			}
-			combined += part.Replace("$" + key, context.Variables[key]);
-		}
-		
+			combined += part.Replace($"{trigger}" + key, variables[key]);
+		} 
 		return combined;
 	}
+	
+	public static string ResolveVariables(this string str, Context context) => Resolve(str, context.Variables, '$');
 
-	public static string ResolveCommonName(this string str, Context context)
-	{
-		return str;
-	}
+	public static string ResolveCommonName(this string str, Context context) => Resolve(str, context.CommonNames, '@');
 }

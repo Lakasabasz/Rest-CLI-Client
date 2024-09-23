@@ -12,4 +12,10 @@
       <ProjectReference Include="..\RestCliClient.UI\RestCliClient.UI.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="common-names.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
