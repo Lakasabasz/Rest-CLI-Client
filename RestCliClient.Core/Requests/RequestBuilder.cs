@@ -1,3 +1,4 @@
+using System.Net.Security;
 using System.Text.Json.Nodes;
 using RestSharp;
 
@@ -9,6 +10,8 @@ public class RequestBuilder
     private readonly Uri _uri;
     private readonly List<KeyValuePair<string, string>> _headers;
     private string _body;
+    private bool _insecureSsl = false;
+    private int _timeout = 60;
     
     public RequestBuilder(string method, string url)
     {
@@ -16,6 +19,18 @@ public class RequestBuilder
         _uri = new Uri(url);
         _headers = [];
         _body = string.Empty;
+    }
+    
+    public RequestBuilder SetInsecureSsl(bool insecureSsl)
+    {
+        _insecureSsl = insecureSsl;
+        return this;
+    }
+    
+    public RequestBuilder SetTimeout(int timeout)
+    {
+        _timeout = timeout;
+        return this;
     }
     
     public RequestBuilder AddHeader(string name, string value)
@@ -44,5 +59,12 @@ public class RequestBuilder
         return request;
     }
 
-    public RestClient BuildClient() => new RestClient(_uri);
+    public RestClient BuildClient()
+    {
+        return new RestClient(_uri, opt => 
+        {
+            opt.RemoteCertificateValidationCallback = _insecureSsl ? ((_, _, _, _) => true) : null;
+            opt.Timeout = new TimeSpan(0, 0, _timeout);
+        });
+    }
 }

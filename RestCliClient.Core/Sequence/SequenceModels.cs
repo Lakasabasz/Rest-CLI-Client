@@ -18,7 +18,13 @@ public record Sequence(
     string method,
     Headers[] headers,
     string body,
-    ResponseOperation[] response_operations
+    ResponseOperation[] response_operations,
+    Options? options 
+);
+
+public record Options(
+    bool? ignore_ssl,
+    int? timeout
 );
 
 public record Headers(

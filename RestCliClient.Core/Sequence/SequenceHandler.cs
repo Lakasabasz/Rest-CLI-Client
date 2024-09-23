@@ -21,12 +21,14 @@ public class SequenceHandler
 	public void Execute(List<string> args)
 	{
 		InitInternalContext(args);
-		foreach (var (uri, method, headers, body, responseOperations) in _sequenceModel.sequence)
+		foreach (var (uri, method, headers, body, responseOperations, options) in _sequenceModel.sequence)
 		{
 			var builder = new RequestBuilder(method, uri.ResolveVariables(_internalContext));
 			foreach (var (name, value) in headers) 
 				builder.AddHeader(name.ResolveVariables(_internalContext), value.ResolveVariables(_internalContext));
 			builder.AppendBody(body.ResolveVariables(_internalContext));
+			if(options?.ignore_ssl == true) builder.SetInsecureSsl(true);
+			if(options?.timeout is not null) builder.SetTimeout(options.timeout.Value);
 			_logger.LogMultiline($"Request: {method} {uri}", 
 				$"{string.Join('\n', headers.Select(x => $"{x.name}: {x.value}"))}"
 				+ "\n\n"
