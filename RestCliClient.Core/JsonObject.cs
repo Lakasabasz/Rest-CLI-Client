@@ -39,7 +39,7 @@ public class JsonObject
         var result = path.Evaluate(_json);
         var match = result.Matches.FirstOrDefault();
         
-        if(match is null) throw new KeyNotFoundException();
-        return match.Value?.ToString() ?? throw new KeyNotFoundException();
+        if(match is null) throw new InvalidOperationException(Consts.Messages.JSON_PATH_NOT_FOUND(rawValue));
+        return match.Value?.ToString() ?? throw new InvalidOperationException(Consts.Messages.JSON_PATH_NOT_FOUND(rawValue));
     }
 }
