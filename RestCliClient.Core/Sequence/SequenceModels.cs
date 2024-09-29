@@ -11,14 +11,7 @@ public class SequenceModel(
 )
 {
     public Variables? variables { get; init; } = variables;
-    [JsonRequired]
-    public Sequence[] sequence { get; init; } = sequence;
-
-    public void Deconstruct(out Variables? variables, out Sequence[] sequence)
-    {
-        variables = this.variables;
-        sequence = this.sequence;
-    }
+    [JsonRequired] public Sequence[] sequence { get; init; } = sequence;
 }
 
 public record Variables(
@@ -30,17 +23,14 @@ public record Variables(
 public class Sequence(
     string uri,
     string method,
-    Headers[] headers,
-    string body,
+    Headers[]? headers,
+    string? body,
     ResponseOperation[] response_operations,
     Options? options
-
 )
 {
-    [JsonRequired]
-    public string uri { get; init; } = uri;
-    [JsonRequired]
-    public string method { get; init; } = method;
+    [JsonRequired] public string uri { get; init; } = uri;
+    [JsonRequired] public string method { get; init; } = method;
     public Headers[]? headers { get; init; } = headers;
     public string? body { get; init; } = body;
     public ResponseOperation[]? response_operations { get; init; } = response_operations;
@@ -64,11 +54,10 @@ public record Options(
 
 public class Headers(
     string name,
-    string value
+    string? value
 )
 {
-    [JsonRequired]
-    public string name { get; init; } = name;
+    [JsonRequired] public string name { get; init; } = name;
     public string? value { get; init; } = value;
 
     public void Deconstruct(out string name, out string? value)
@@ -83,15 +72,7 @@ public class ResponseOperation(
     string value
 )
 {
-    [JsonRequired]
-    public string variable { get; init; } = variable;
-    [JsonRequired]
-    public string value { get; init; } = value;
-
-    public void Deconstruct(out string variable, out string value)
-    {
-        variable = this.variable;
-        value = this.value;
-    }
+    [JsonRequired] public string variable { get; init; } = variable;
+    [JsonRequired] public string value { get; init; } = value;
 }
 

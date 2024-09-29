@@ -44,9 +44,7 @@ public class SequenceHandler
 			if (!_internalContext.Variables.TryGetValue(outVar, out string? value))
 				throw new InvalidOperationException(Messages.VARIABLE_NOT_FOUND(outVar));
 			_globalContext.Variables[outVar] = value;
-			
 		}
-
 	}
 	
 	private void InitInternalContext(List<string> args)
@@ -56,9 +54,7 @@ public class SequenceHandler
 		if(_sequenceModel.variables.@in.Length != args.Count) 
 			throw new FormatException(Messages.INVALID_EXECUTE_ARGUMENTS_COUNT(_sequenceModel.variables.@in.Length, args.Count));
 		foreach (var keyValuePair in _sequenceModel.variables.@in.Zip(args, (a, b) => new KeyValuePair<string, string>(a, b)))
-		{
 			_internalContext.Variables[keyValuePair.Key] = keyValuePair.Value;
-		}
 	}
 	
 	private void PerformPostRequestOperation(ResponseOperation operation)

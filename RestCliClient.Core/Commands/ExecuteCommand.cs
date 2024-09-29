@@ -10,14 +10,13 @@ class ExecuteCommand: ICommand
 	public IEnumerable<Scopes> ValidScopes => [Scopes.Global];
 	public void Execute(Context context, ILogger logger)
 	{
-		
 		if(_command is null) throw new NullReferenceException("Command is null");
 		var fragments = _command.Split(" ");
 		if(fragments.Length <= 1) throw new FormatException(Messages.INVALID_EXECUTE_COMMAND);
 		var filename = fragments[1];
 		var fileData = File.ReadAllText(filename + ".json");
 		var sequenceModel = JsonSerializer.Deserialize<SequenceModel>(fileData);
-		if(sequenceModel is null ) throw new FormatException(Messages.INVALID_SEQUENCE_FORMAT);
+		if(sequenceModel is null) throw new FormatException(Messages.INVALID_SEQUENCE_FORMAT);
 		SequenceHandler handler = new SequenceHandler(sequenceModel, context, logger);
 		handler.Execute(fragments[2..].ToList());
 	}
