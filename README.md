@@ -36,27 +36,32 @@ App allow to save requests sequence and execute it. It can be saved to files usi
 
 ```json
 {
-  "name": "PrepareUser",
-  "in-variables": [
-    "token",
-    "username",
-    "password"
-  ],
-  "internal-variables": [],
-  "out-variables": [
-    "user-guid"
-  ],
+  "variables": {
+    "in": [
+      "token",
+      "username",
+      "password"
+    ],
+    "out": [
+      "user-id",
+      "user-token"
+    ]
+  },
   "sequence": [
     {
-      "uri": "http://example.com/api/users",
+      "uri": "https://example.com/api/users",
       "method": "POST",
+      "options": {
+        "ignore_ssl": false,
+        "timeout": 15
+      },
       "headers": [
         {"name": "Authorization", "value": "Bearer $token"},
         {"name": "Content-Type", "value": "application/json"}
       ],
       "body": "{\"username\": \"$username\", \"password\": \"$password\", \"category\": \"$$\"}",
-      "response-operations": [
-        {"variable": "user-guid", "path": "$.user.id"}
+      "response_operations": [
+        {"variable": "user-guid", "value": "$.user.id"}
       ]
     }
   ]
@@ -79,6 +84,21 @@ user-guid=2137
 < All sequences finished successfully
 > 
 ```
+
+### Minimal valid JSON
+```json
+{
+  "sequence": [
+    {
+      "uri": "https://example.com/api/users",
+      "method": "POST"
+    }
+  ]
+}
+```
+Other fields are optional, except:
+- `sequence.headers` if specified requires `name`
+- `sequence.response_operations` if specified requires `variable` and `value`
 
 ## Common name
 App has predefined common text like `Content-Type: application/json`. It can be extended adding new
