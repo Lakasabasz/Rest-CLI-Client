@@ -48,4 +48,21 @@ static class TestConsts
   ]
 }
 """;
+
+    public const string ReadMeBodyObjectJson =
+"""
+{
+  "sequence": [
+    {
+      "uri": "https://example.com/api/users",
+      "method": "POST",
+      "body": {
+        "username": "$username",
+        "password": "$password",
+        "category": "$$"
+      }
+    }
+  ]
+}
+""";
 }

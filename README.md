@@ -100,6 +100,24 @@ Other fields are optional, except:
 - `sequence.headers` if specified requires `name`
 - `sequence.response_operations` if specified requires `variable` and `value`
 
+### Body
+Body can be serialized to string or stored as object
+```json
+{
+  "sequence": [
+    {
+      "uri": "https://example.com/api/users",
+      "method": "POST",
+      "body": {
+        "username": "$username",
+        "password": "$password",
+        "category": "$$"
+      }
+    }
+  ]
+}
+```
+
 ## Common name
 App has predefined common text like `Content-Type: application/json`. It can be extended adding new
 entry to file

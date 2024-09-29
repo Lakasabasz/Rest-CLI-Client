@@ -24,7 +24,7 @@ public class Sequence(
     string uri,
     string method,
     Headers[]? headers,
-    string? body,
+    object? body,
     ResponseOperation[] response_operations,
     Options? options
 )
@@ -32,11 +32,11 @@ public class Sequence(
     [JsonRequired] public string uri { get; init; } = uri;
     [JsonRequired] public string method { get; init; } = method;
     public Headers[]? headers { get; init; } = headers;
-    public string? body { get; init; } = body;
+    public object? body { get; init; } = body;
     public ResponseOperation[]? response_operations { get; init; } = response_operations;
     public Options? options { get; init; } = options;
 
-    public void Deconstruct(out string uri, out string method, out Headers[]? headers, out string? body, out ResponseOperation[]? response_operations, out Options? options)
+    public void Deconstruct(out string uri, out string method, out Headers[]? headers, out object? body, out ResponseOperation[]? response_operations, out Options? options)
     {
         uri = this.uri;
         method = this.method;

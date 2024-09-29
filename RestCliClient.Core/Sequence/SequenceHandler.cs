@@ -1,3 +1,4 @@
+using System.Text.Json;
 using RestCliClient.Core.Consts;
 using RestCliClient.Core.Requests;
 
@@ -26,7 +27,11 @@ public class SequenceHandler
 			var builder = new RequestBuilder(method, uri.ResolveVariables(_internalContext));
 			foreach (var (name, value) in headers??[]) 
 				builder.AddHeader(name.ResolveVariables(_internalContext), value!.ResolveVariables(_internalContext));
-			if(body is not null)builder.AppendBody(body.ResolveVariables(_internalContext));
+			if(body is not null)
+			{
+				if(body is string strBody) builder.AppendBody(strBody.ResolveVariables(_internalContext));
+				else builder.AppendBody(JsonSerializer.Serialize(body).ResolveVariables(_internalContext));
+			}
 			if(options?.ignore_ssl == true) builder.SetInsecureSsl(true);
 			if(options?.timeout is not null) builder.SetTimeout(options.timeout.Value);
 			_logger.LogMultiline($"Request: {method} {uri}", 
